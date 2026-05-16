@@ -27,7 +27,7 @@ jobs:
       - name: Run preprocessing
         run: |
           cd preprocessing
-          python automate_NamaAnda.py
+          python automate_RizkiMaulana.py
       
       - name: Commit hasil preprocessing
         run: |
