@@ -1,0 +1,38 @@
+name: Auto Preprocessing
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'diabetes_raw/**'
+      - 'preprocessing/automate_RizkiMaulana.py'
+  workflow_dispatch:
+
+jobs:
+  preprocess:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.12.7'
+      
+      - name: Install dependencies
+        run: |
+          pip install pandas numpy scikit-learn
+      
+      - name: Run preprocessing
+        run: |
+          cd preprocessing
+          python automate_RizkiMaulana.py
+      
+      - name: Commit hasil preprocessing
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add preprocessing/diabetes_preprocessing/
+          git diff --staged --quiet || git commit -m "Auto: update preprocessed dataset"
+          git push
