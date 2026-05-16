@@ -55,13 +55,7 @@ def preprocess_data(input_path, output_dir):
     return X_train_scaled, X_test_scaled, y_train, y_test
 
 if __name__ == "__main__":
-
-    script_dir = os.path.dirname(os.path.abspath(__file__))
-    
-    file_input = os.path.join(script_dir, '../diabetes_raw/diabetes.csv')
-    folder_output = os.path.join(script_dir, 'diabetes_preprocessing')
-
     preprocess_data(
-        input_path=file_input,
-        output_dir=folder_output
+        input_path='diabetes_raw/diabetes.csv',
+        output_dir='diabetes_preprocessing'
     )
